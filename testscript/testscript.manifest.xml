@@ -1,0 +1,29 @@
+<manifest>
+    <main-class>testscript.Chopper</main-class>
+    <name>Valkyr's Powerchopper</name>
+    <description>Quickly chops trees for fast experience!</description>
+    <version>1.0.2</version>
+    <compatibility>
+        <game>OSRS</game>
+        <game>RS3</game>
+        <game>DARK</game>
+        <!--Can be used if you absolutely need to disable DarkScape (highly discouraged)-->
+        <!--<disable-game>DARK</disable-game>-->
+    </compatibility>
+    <categories>
+        <category>WOODCUTTING</category>
+    </categories>
+    <!--Required to publish on the bot store-->
+    <internal-id>PowerChopper</internal-id>
+    <!--The rest are optional-->
+    <open-source>true</open-source>
+    <hidden>false</hidden> <!--If you need to hide it from the bot store for maintenance-->
+    <access>public</access>
+    <tags>
+        <tag>Tree</tag>
+    </tags>
+    <resources>
+        <resource></resource>
+    </resources>
+</manifest>
+ 

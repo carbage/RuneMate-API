@@ -42,7 +42,7 @@ public class WebWalker {
                 Logger.log("Closing bank.");
                 Bank.close();
             }
-            //Logger.log("Searching for Interactable at " + location);
+            Logger.log("Searching for Interactable at " + location);
             if (entity != null && Calculations.canReach(entity)) {
                 if (!PlayerInfo.isPlayerInteracting()) {
                     if (entity.interact(option)) {

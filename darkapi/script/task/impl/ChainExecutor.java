@@ -1,7 +1,6 @@
 package darkapi.script.task.impl;
 
 import darkapi.script.task.ChainableTask;
-import darkapi.script.task.TaskExecutor;
 
 /**
  * Created by Valkyr on 13/09/15.

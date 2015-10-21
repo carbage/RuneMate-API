@@ -30,7 +30,7 @@ public class DepositAllExceptTask extends BankingTask {
                 return false;
             }
         }
-        return true;
+        return Bank.close();
     }
 
     @Override

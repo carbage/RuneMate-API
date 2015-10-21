@@ -39,6 +39,7 @@ public class InteractEntityTask extends ChainableTask {
 
     @Override
     public boolean execute() {
+        Logger.log("[" + getClass().getSimpleName() + "]: Searching for entity");
         LocatableEntity entity = queryBuilder.string(stringFilter).results().nearestTo(location);
         if (entity != null) {
             Logger.log("[" + getClass().getSimpleName() + "]: Found entity, attempting to interact...");

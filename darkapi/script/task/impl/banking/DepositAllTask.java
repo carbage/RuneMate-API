@@ -9,11 +9,9 @@ import darkapi.script.utils.PlayerInfo;
  */
 public class DepositAllTask extends BankingTask {
     private final String[] items;
-    private final boolean depositBox;
 
-    public DepositAllTask(boolean depositBox, String... items) {
+    public DepositAllTask(String... items) {
         this.items = items;
-        this.depositBox = depositBox;
     }
 
     @Override
@@ -23,7 +21,7 @@ public class DepositAllTask extends BankingTask {
                 if (!Bank.deposit(item, 0))
                     return false;
         }
-        return true;
+        return Bank.close();
     }
 
     @Override

@@ -18,7 +18,7 @@ public class WithdrawTask extends BankingTask {
     @Override
     public boolean execute() {
         if (openBank()) {
-            return Bank.withdraw(itemName, 0);
+            return Bank.withdraw(itemName, 0) && Bank.close();
         }
         return false;
     }

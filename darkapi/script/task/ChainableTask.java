@@ -15,10 +15,10 @@ public abstract class ChainableTask implements Executable {
 
     public boolean process() {
         if (canExecute()) {
-            Logger.log("Attempting to execute task: [" + getClass().getSimpleName() + "]");
+            Logger.log("Executing task: [" + getClass().getSimpleName() + "]");
             boolean executed = execute();
             if (chained != null) {
-                Logger.log("Executing chained task: [" + chained.getClass().getSimpleName() + "]");
+                Logger.log("Executing child task: [" + chained.getClass().getSimpleName() + "]");
                 chained.process();
             }
             if (executed) Logger.log("Successfully executed task: [" + getClass().getSimpleName() + "]");

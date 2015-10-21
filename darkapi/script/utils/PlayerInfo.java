@@ -11,22 +11,19 @@ public class PlayerInfo {
     private static Player myPlayer;
 
     public static boolean isPlayerIdle() {
-        if (myPlayer != null) {
-            return !isPlayerMoving() && !isPlayerAnimating() && isPlayerInteracting();
-        }
-        return false;
+        return !isPlayerMoving() && !isPlayerAnimating() && !isPlayerInteracting();
     }
 
     public static boolean isPlayerMoving() {
-        return myPlayer != null &&  myPlayer.isMoving();
+        return myPlayer != null && myPlayer.isMoving();
     }
 
     public static boolean isPlayerAnimating() {
-        return myPlayer != null &&  myPlayer.getAnimationId() == -1;
+        return myPlayer != null && myPlayer.getAnimationId() == -1;
     }
 
     public static boolean isPlayerInteracting() {
-        return myPlayer != null &&  myPlayer.getTarget() != null;
+        return myPlayer != null && myPlayer.getTarget() != null;
     }
 
     public static Player myPlayer() {
