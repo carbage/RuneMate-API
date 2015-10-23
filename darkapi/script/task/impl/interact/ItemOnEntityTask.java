@@ -1,14 +1,11 @@
 package darkapi.script.task.impl.interact;
 
-import com.runemate.game.api.hybrid.entities.Actor;
 import com.runemate.game.api.hybrid.entities.details.Interactable;
-import com.runemate.game.api.hybrid.entities.details.Onymous;
 import com.runemate.game.api.hybrid.local.hud.interfaces.Inventory;
 import com.runemate.game.api.hybrid.local.hud.interfaces.SpriteItem;
-import com.runemate.game.api.hybrid.util.Filter;
 import darkapi.script.task.ChainableTask;
 import darkapi.script.utils.PlayerInfo;
-import darkapi.script.utils.onymous.OnymousQueryBuilder;
+import darkapi.script.utils.OnymousQueryBuilder;
 
 import java.util.function.Predicate;
 

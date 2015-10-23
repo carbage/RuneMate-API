@@ -27,10 +27,10 @@ public class DepositAllExceptTask extends BankingTask {
                     return except.contains(spriteItem.getDefinition().getName());
                 }
             })) {
-                return false;
+                return Bank.close();
             }
         }
-        return Bank.close();
+        return false;
     }
 
     @Override

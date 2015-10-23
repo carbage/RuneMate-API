@@ -29,7 +29,7 @@ public class Walker {
         if (PlayerInfo.isPlayerIdle() || (!next.equals(last) && Calculations.distance(next.construct()) <= distance)) {
             if (next != null) {
                 Logger.log("Found suitable node [" + next.construct() + "]");
-                if (Calculations.canReach(next.construct()) && PlayerInfo.myPosition().getPlane() == next.getPlane()) {
+                if (Calculations.canReach(next.construct()) && myPos.getPlane() == next.getPlane()) {
                     Logger.log("Next node is reachable, walking via LocalWalker");
                     RegionPath.buildTo(next.construct()).step();
                 } else {

@@ -18,10 +18,10 @@ public class DepositAllTask extends BankingTask {
     public boolean execute() {
         if (openBank()) {
             for (String item : items)
-                if (!Bank.deposit(item, 0))
-                    return false;
+                if (Bank.deposit(item, 0))
+                    return Bank.close();
         }
-        return Bank.close();
+        return false;
     }
 
     @Override

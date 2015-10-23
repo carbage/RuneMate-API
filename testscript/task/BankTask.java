@@ -11,6 +11,7 @@ import darkapi.script.utils.PlayerInfo;
 public class BankTask extends ChainableTask {
     @Override
     public boolean execute() {
+        log("Banking...");
         return ChainExecutor.exec(new DepositAllTask("Logs"));
     }
 

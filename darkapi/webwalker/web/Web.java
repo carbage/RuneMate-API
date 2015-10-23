@@ -12,9 +12,6 @@ import java.util.HashMap;
 
 public class Web {
 
-    public static final int DISTANCE = 4;
-    private static Web instance;
-
     private final java.util.Map<Integer, WebNode> nodeMap = new HashMap<>();
     private final ArrayList<WebNode> nodes = new ArrayList<>();
     private final ArrayList<WebNode> banks = new ArrayList<>();
@@ -115,10 +112,6 @@ public class Web {
                     v = vtx;
                 }
         return v;
-    }
-
-    public static Web getInstance() {
-        return instance == null ? (instance = new Web()) : instance;
     }
 
     public boolean isLoaded() {

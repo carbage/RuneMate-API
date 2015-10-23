@@ -1,20 +1,27 @@
 package darkapi.script.task.impl.walking;
 
+import com.runemate.game.api.hybrid.location.Coordinate;
 import darkapi.script.task.ChainableTask;
+import darkapi.script.task.impl.ChainExecutor;
+import darkapi.webwalker.WebWalker;
+import darkapi.webwalker.web.Web;
+import darkapi.webwalker.web.WebNode;
+
+import java.util.function.Predicate;
 
 /**
  * Created by Valkyr on 12/09/15.
  */
-/*public class WebWalkTask extends ChainableTask {
+public class WebWalkTask extends ChainableTask {
 
-    private final WebNode destination;
+    private final Coordinate destination;
 
-    public WebWalkTask(int dX, int dY, int dZ) {
-        this(webNode -> webNode.equals(new Tile(dX, dY, dZ)));
+    public WebWalkTask(Coordinate destination) {
+        this.destination = destination;
     }
 
-    public WebWalkTask( int dX, int dY) {
-        this(webNode -> webNode.equals(new Tile(dX, dY, 0)));
+    public WebWalkTask(Predicate<WebNode> nodeFilter) {
+        this(WebWalker.getClosest(nodeFilter).construct());
     }
 
     public WebWalkTask(String... names) {
@@ -24,17 +31,21 @@ import darkapi.script.task.ChainableTask;
         });
     }
 
-    public WebWalkTask(Predicate<WebNode> nodeFilter) {
-        this(WebWalker.getClosest(nodeFilter));
+    public WebWalkTask(int dX, int dY, int dZ) {
+        this(new Coordinate(dX, dY, dZ));
     }
 
-    public WebWalkTask(WebNode destination) {
-        this.destination = destination;
+    public WebWalkTask(int dX, int dY) {
+        this(new Coordinate(dX, dY, 0));
     }
 
     @Override
     public boolean execute() {
-        return getContext().getWebWalker().walk(destination);
+        if (!WebWalker.walk(WebWalker.getClosest(webNode -> webNode.equals(destination)))) {
+            log("Could not webwalk to destination, falling back on native webwalker...");
+            return ChainExecutor.exec(new NativeWebWalkTask(destination));
+        }
+        return true;
     }
 
     @Override
@@ -46,4 +57,4 @@ import darkapi.script.task.ChainableTask;
     public boolean canExecute() {
         return destination != null;
     }
-}*/
+}

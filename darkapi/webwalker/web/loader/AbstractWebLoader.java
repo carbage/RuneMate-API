@@ -23,7 +23,7 @@ public abstract class AbstractWebLoader implements ILoader<Web, WebNode> {
 
     protected AbstractWebLoader(Web web) {
         this.web = web;
-        this.fileStream = this.getClass().getResourceAsStream("/resources/" + LoaderSettings.WEB);
+        this.fileStream = this.getClass().getResourceAsStream("/darkapi/resources/" + LoaderSettings.WEB);
         //log("IF IT'S NOT LOADING, PM CZAR");
     }
 

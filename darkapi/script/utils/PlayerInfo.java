@@ -19,7 +19,7 @@ public class PlayerInfo {
     }
 
     public static boolean isPlayerAnimating() {
-        return myPlayer != null && myPlayer.getAnimationId() == -1;
+        return myPlayer != null && myPlayer.getAnimationId() != -1;
     }
 
     public static boolean isPlayerInteracting() {

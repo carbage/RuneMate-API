@@ -22,13 +22,17 @@ public abstract class ChainableTask implements Executable {
                 chained.process();
             }
             if (executed) Logger.log("Successfully executed task: [" + getClass().getSimpleName() + "]");
-            else Logger.log("Failed to execute task: [" + getClass().getSimpleName() + "]");
+            else Logger.log("Error executing task: [" + getClass().getSimpleName() + "]");
             return executed;
         } else {
             Logger.log("Unable to execute task: [" + getClass().getSimpleName() + "], preparing...");
             prepare();
         }
         return false;
+    }
+
+    public void log(String log) {
+        Logger.log("[" + getClass().getSimpleName() + "]: " + log);
     }
 
     public abstract boolean execute();

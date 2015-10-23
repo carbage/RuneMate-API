@@ -5,7 +5,7 @@ import com.runemate.game.api.hybrid.location.Coordinate;
 import darkapi.script.task.ChainableTask;
 import darkapi.script.utils.Logger;
 import darkapi.script.utils.PlayerInfo;
-import darkapi.script.utils.onymous.OnymousQueryBuilder;
+import darkapi.script.utils.OnymousQueryBuilder;
 
 import java.util.function.Predicate;
 

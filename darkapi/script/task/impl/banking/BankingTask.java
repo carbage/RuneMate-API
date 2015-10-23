@@ -9,6 +9,7 @@ import com.sun.scenario.Settings;
 import darkapi.script.task.ChainableTask;
 import darkapi.script.utils.Banking;
 import darkapi.script.utils.Logger;
+import darkapi.script.utils.PlayerInfo;
 import darkapi.webwalker.WebWalker;
 import darkapi.webwalker.web.WebNode;
 
@@ -28,9 +29,9 @@ public abstract class BankingTask extends ChainableTask {
             Logger.log("Attemting to open bank.");
             if (!Bank.open()) {
                 Logger.log("Unable to open bank, walking to selected location.");
-                Coordinate position = !Banking.useCustomBank() ? Players.getLocal().getPosition() : Banking.getBankLocation();
-                WebNode destination = WebWalker.getClosestNode(position, "Bank booth", "Bank chest");
-                WebWalker.walk(destination);
+                Coordinate position = !Banking.useCustomBank() ? PlayerInfo.myPosition() : Banking.getBankLocation();
+                WebNode destination = WebWalker.getClosest(webNode -> webNode.hasAction("Bank"), position);
+                //WebWalker.walk(destination);
             }
         } else cachedBank = Bank.getItems();
         return isBankOpen();
