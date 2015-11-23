@@ -2,9 +2,8 @@ package darkapi.script.task.impl.walking;
 
 import com.runemate.game.api.hybrid.location.Coordinate;
 import darkapi.script.task.ChainableTask;
-import darkapi.script.task.impl.ChainExecutor;
+import darkapi.script.utils.PlayerInfo;
 import darkapi.webwalker.WebWalker;
-import darkapi.webwalker.web.Web;
 import darkapi.webwalker.web.WebNode;
 
 import java.util.function.Predicate;
@@ -14,14 +13,18 @@ import java.util.function.Predicate;
  */
 public class WebWalkTask extends ChainableTask {
 
-    private final Coordinate destination;
+    private final WebNode destination;
 
     public WebWalkTask(Coordinate destination) {
-        this.destination = destination;
+        this(webNode -> webNode.getPlane() == destination.getPlane(), destination);
+    }
+    public WebWalkTask(Predicate<WebNode> nodeFilter) {
+        this(nodeFilter, PlayerInfo.myPosition());
     }
 
-    public WebWalkTask(Predicate<WebNode> nodeFilter) {
-        this(WebWalker.getClosest(nodeFilter).construct());
+    public WebWalkTask(Predicate<WebNode> nodeFilter, Coordinate destination) {
+        WebNode found = WebWalker.getClosest(nodeFilter, destination);
+        this.destination = found;
     }
 
     public WebWalkTask(String... names) {
@@ -41,9 +44,9 @@ public class WebWalkTask extends ChainableTask {
 
     @Override
     public boolean execute() {
-        if (!WebWalker.walk(WebWalker.getClosest(webNode -> webNode.equals(destination)))) {
+        if (!WebWalker.walk(destination)) {
             log("Could not webwalk to destination, falling back on native webwalker...");
-            return ChainExecutor.exec(new NativeWebWalkTask(destination));
+           // return chain(new NativeWebWalkTask(destination.construct()));
         }
         return true;
     }
@@ -56,5 +59,9 @@ public class WebWalkTask extends ChainableTask {
     @Override
     public boolean canExecute() {
         return destination != null;
+    }
+
+    public final WebNode getDestination() {
+        return destination;
     }
 }

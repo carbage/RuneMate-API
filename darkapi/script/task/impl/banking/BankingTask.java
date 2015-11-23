@@ -7,6 +7,8 @@ import com.runemate.game.api.hybrid.region.Npcs;
 import com.runemate.game.api.hybrid.region.Players;
 import com.sun.scenario.Settings;
 import darkapi.script.task.ChainableTask;
+import darkapi.script.task.impl.ChainExecutor;
+import darkapi.script.task.impl.walking.WebWalkTask;
 import darkapi.script.utils.Banking;
 import darkapi.script.utils.Logger;
 import darkapi.script.utils.PlayerInfo;
@@ -29,9 +31,7 @@ public abstract class BankingTask extends ChainableTask {
             Logger.log("Attemting to open bank.");
             if (!Bank.open()) {
                 Logger.log("Unable to open bank, walking to selected location.");
-                Coordinate position = !Banking.useCustomBank() ? PlayerInfo.myPosition() : Banking.getBankLocation();
-                WebNode destination = WebWalker.getClosest(webNode -> webNode.hasAction("Bank"), position);
-                //WebWalker.walk(destination);
+                chain(new WebWalkTask(Banking.getBankLocation()));
             }
         } else cachedBank = Bank.getItems();
         return isBankOpen();

@@ -18,16 +18,10 @@ import darkapi.script.utils.PlayerInfo;
 /**
  * Created by Valkyr on 20/10/2015.
  */
-public class ChopTask extends ChainableTask {
-    @Override
-    public boolean execute() {
-        log("Chopping trees...");
-        return ChainExecutor.exec(new InteractGameObjectTask("Tree", "Chop down", new Coordinate(2888, 3536)));
-    }
+public class ChopTask extends InteractGameObjectTask {
 
-    @Override
-    public void prepare() {
-
+    public ChopTask() {
+        super("Tree", "Chop down", new Coordinate(3198, 3217));
     }
 
     @Override

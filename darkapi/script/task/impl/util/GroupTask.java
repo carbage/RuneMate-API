@@ -3,6 +3,7 @@ package darkapi.script.task.impl.util;
 
 import darkapi.script.task.ChainableTask;
 import darkapi.script.task.impl.ChainExecutor;
+import darkapi.script.utils.PlayerInfo;
 
 /**
  * Created by Valkyr on 14/09/15.

@@ -1,6 +1,7 @@
 package darkapi.webwalker;
 
 import com.runemate.game.api.hybrid.location.Coordinate;
+import darkapi.script.utils.InfoTracker;
 import darkapi.script.utils.Logger;
 import darkapi.script.utils.PlayerInfo;
 import darkapi.webwalker.web.Web;
@@ -10,6 +11,7 @@ import darkapi.webwalker.web.loader.impl.OptimizedWebLoader;
 import darkapi.webwalker.web.pathfinder.Pathfinder;
 import darkapi.webwalker.web.pathfinder.impl.AStarPathfinder;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -19,11 +21,15 @@ public class WebWalker {
     private static final Pathfinder pathfinder = new AStarPathfinder(web);
     private static final Walker walker = new Walker();
 
-    public static boolean walk(WebNode v) {
-        if (v != null) {
-            Logger.log("Finding path to [" + v.toString() + "]");
-            ArrayList<WebNode> p1 = findPath(v);
-            walkPath(p1);
+    public static boolean walk(WebNode destination) {
+        if (destination != null) {
+            Logger.log("Finding path to [" + destination.toString() + "]");
+            ArrayList<WebNode> path = findPath(destination);
+            if (path != null) {
+                InfoTracker.setWebPath(path);
+                Logger.log("Found path to " + destination + " (" + path.size() + " nodes)");
+                walkPath(path);
+            } else Logger.log("Could not find path to " + destination);
         }
         return false;
     }

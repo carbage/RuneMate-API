@@ -69,6 +69,9 @@ public class OptimizedWebLoader extends AbstractWebLoader {
         getWeb().setLoaded(true);
         log("Loaded " + getWeb().getNodes().size() + " nodes");
         log("Loaded " + getWeb().getObstacles().size() + " obstacles");
+        log("Loaded " + getWeb().getBanks().size() + " banks");
+        log("Loaded " + getWeb().getNpcs()+ " npcs");
+        log("Loaded " + getWeb().getResources() + " resources");
         log("Loaded web in " + (System.currentTimeMillis() - startTime) + "ms");
         return getWeb();
     }

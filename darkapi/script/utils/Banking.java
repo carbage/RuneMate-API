@@ -3,18 +3,20 @@ package darkapi.script.utils;
 import com.runemate.game.api.hybrid.location.Coordinate;
 
 /**
- * Created by Aiden on 18/10/2015.
+ * Created by Valkyr on 18/10/2015.
  */
 public class Banking {
 
-    private static boolean useCustomBank;
+    private static boolean useBanking;
+
     private static Coordinate bankLocation;
 
-    public static void setUseCustomBank(boolean useCustomBank) {
-        Banking.useCustomBank = useCustomBank;
+    public static boolean getUseBanking() {
+        return useBanking;
     }
-    public static boolean useCustomBank() {
-        return useCustomBank;
+
+    public static void setUseBanking(boolean useBanking) {
+        Banking.useBanking = useBanking;
     }
 
     public static void setBankLocation(Coordinate bankLocation) {
@@ -22,6 +24,6 @@ public class Banking {
     }
 
     public static Coordinate getBankLocation() {
-        return bankLocation;
+        return bankLocation == null ? (bankLocation = PlayerInfo.myPosition()) : bankLocation;
     }
 }

@@ -2,6 +2,7 @@ package darkapi.script.utils;
 
 import com.runemate.game.api.hybrid.entities.Player;
 import com.runemate.game.api.hybrid.location.Coordinate;
+import darkapi.gui.javafx.component.impl.FXConsoleComponent;
 
 /**
  * Created by Valkyr on 18/10/2015.
@@ -9,18 +10,10 @@ import com.runemate.game.api.hybrid.location.Coordinate;
 public class Settings {
 
     // Settings variables
-    private static boolean useBanking;
     private static boolean useTeleports;
     private static boolean useAntiban;
     private static boolean useFatigue;
-
-    public static boolean getUseBanking() {
-        return useBanking;
-    }
-
-    public static void setUseBanking(boolean useBanking) {
-        Settings.useBanking = useBanking;
-    }
+    private static FXConsoleComponent fxConsoleComponent;
 
     public static boolean getUseTeleports() {
         return useTeleports;
@@ -46,4 +39,11 @@ public class Settings {
         Settings.useFatigue = useFatigue;
     }
 
+    public static void setFxConsoleComponent(FXConsoleComponent fxConsoleComponent) {
+        Settings.fxConsoleComponent = fxConsoleComponent;
+    }
+
+    public static FXConsoleComponent getFxConsoleComponent() {
+        return fxConsoleComponent;
+    }
 }

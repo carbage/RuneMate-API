@@ -1,5 +1,6 @@
 package darkapi.script.task.impl.walking;
 
+import com.runemate.game.api.hybrid.entities.details.Locatable;
 import com.runemate.game.api.hybrid.location.Coordinate;
 import com.runemate.game.api.hybrid.location.navigation.Traversal;
 import com.runemate.game.api.hybrid.location.navigation.cognizant.RegionPath;
@@ -12,7 +13,7 @@ import darkapi.script.task.ChainableTask;
  */
 public class LocalWalkTask extends ChainableTask {
 
-    private final Coordinate destination;
+    private final Locatable destination;
 
     public LocalWalkTask(int dX, int dY, int dZ) {
         this(new Coordinate(dX, dY, dZ));
@@ -22,7 +23,7 @@ public class LocalWalkTask extends ChainableTask {
         this(new Coordinate(dX, dY, 0));
     }
 
-    public LocalWalkTask(Coordinate destination) {
+    public LocalWalkTask(Locatable destination) {
         this.destination = destination;
     }
 

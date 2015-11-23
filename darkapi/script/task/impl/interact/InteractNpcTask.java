@@ -17,7 +17,7 @@ import darkapi.script.utils.PlayerInfo;
 import java.util.function.Predicate;
 
 /**
- * Created by Aiden on 22/10/2015.
+ * Created by Valkyr on 22/10/2015.
  */
 public class InteractNpcTask extends ChainableTask {
 
@@ -51,7 +51,7 @@ public class InteractNpcTask extends ChainableTask {
         if (entity != null) {
             log("Found entity, attempting to interact...");
             if (entity.interact(action)) {
-                ChainExecutor.exec(new WaitForConditionTask(() -> !PlayerInfo.isPlayerIdle()));
+                chain(new WaitForConditionTask(() -> !PlayerInfo.isPlayerIdle()));
                 return true;
             } else {
                 log("Could not interact with entity!");

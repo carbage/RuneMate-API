@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Created by Aiden on 22/10/2015.
+ * Created by Valkyr on 22/10/2015.
  */
 /*public class PaintManager implements PaintListener {
 

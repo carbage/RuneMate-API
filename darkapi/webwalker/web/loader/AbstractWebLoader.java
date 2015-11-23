@@ -16,8 +16,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public abstract class AbstractWebLoader implements ILoader<Web, WebNode> {
-    private Web web;
-    private InputStream fileStream;
+    private final Web web;
+    private final InputStream fileStream;
 
     protected final int processors = 1;
 
@@ -42,7 +42,6 @@ public abstract class AbstractWebLoader implements ILoader<Web, WebNode> {
         try {
             int size = set.length - 1;
             log("Reading web on " + processors + " thread" + (processors > 1 ? "s" : "") + "...");
-            log("[DEBUG] " + size + " lines per thread");
             ExecutorService es = Executors.newCachedThreadPool();
             int start = 0;
             int end = size;
@@ -99,7 +98,6 @@ public abstract class AbstractWebLoader implements ILoader<Web, WebNode> {
             }
 
             rawSet = strings.toArray(new String[strings.size()]);
-            log("Loaded " + strings.size() + " lines");
             return rawSet;
         } catch (IOException e) {
             e.printStackTrace();

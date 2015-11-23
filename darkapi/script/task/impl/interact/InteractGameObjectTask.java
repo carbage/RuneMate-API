@@ -20,7 +20,7 @@ import darkapi.script.utils.PlayerInfo;
 import java.util.function.Predicate;
 
 /**
- * Created by Aiden on 22/10/2015.
+ * Created by Valkyr on 22/10/2015.
  */
 public class InteractGameObjectTask extends ChainableTask {
 
@@ -40,11 +40,15 @@ public class InteractGameObjectTask extends ChainableTask {
     }
 
     public InteractGameObjectTask(String name, String action, Coordinate location) {
-        this(gameObject -> gameObject.getDefinition().getName().equals(name), action, location);
+        this(gameObject -> gameObject != null && gameObject.getDefinition() != null && gameObject.getDefinition().getName() != null && gameObject.getDefinition().getName().equals(name), action, location);
     }
 
     public InteractGameObjectTask(String name, String action) {
         this(name, action, PlayerInfo.myPosition());
+    }
+
+    public InteractGameObjectTask(GameObject object, String action) {
+        this(entity -> entity.equals(object), action);
     }
 
     @Override
@@ -54,28 +58,28 @@ public class InteractGameObjectTask extends ChainableTask {
         if (entity != null) {
             log("Found entity, attempting to interact...");
             if (entity.interact(action)) {
-                ChainExecutor.exec(new WaitForConditionTask(() -> !PlayerInfo.isPlayerIdle()));
+                chain(new WaitForConditionTask(() -> !PlayerInfo.isPlayerIdle()));
                 return true;
             } else {
                 log("Could not interact with entity!");
-                if(entity.getPosition().distanceTo(PlayerInfo.myPosition()) < 16) {
+                if (entity.getPosition().distanceTo(PlayerInfo.myPosition()) < 16) {
                     log("Entity is on minimap, operating camera...");
                     Camera.turnTo(entity);
                 } else {
                     log("Entity is not on minimap, attempting to walk...");
                     RegionPath path = RegionPath.buildTo(entity);
-                    if(path != null) {
+                    if (path != null) {
                         log("Local path found, stepping...");
                         path.step(true);
-                    } else {
-                        log("No local path found, attempting to webwalk...");
-                        ChainExecutor.exec(new WebWalkTask(location));
                     }
                 }
             }
             return false;
+        } else if (!location.isReachable()) {
+            log("Destination unreachable, attempting to webwalk...;");
+            chain(new WebWalkTask(location));
         }
-        log("No entity found!");
+        log("Waiting for entity to spawn...");
         return false;
     }
 
